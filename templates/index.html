@@ -1,12 +1,19 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
-  <body>
-      <h1>
-        Hello world!
-      </h1>
-  </body>
+<html class="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="static/output.css" rel="stylesheet">
+</head>
+<body class="bg-white dark:bg-black">
+  <div hx-target="this" hx-swap="outerHTML" class="bg-white">
+    <div><label>First Name</label>: Joe</div>
+    <div><label>Last Name</label>: Blow</div>
+    <div><label>Email</label>: joe@blow.com</div>
+    <button hx-get="/contact" class="btn btn-primary">
+    Click To Edit
+    </button>
+</div>
+  <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+</body>
 </html>
