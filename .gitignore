@@ -161,3 +161,6 @@ cython_debug/
 
 #tailwind css
 node_modules/
+
+#database
+store/
