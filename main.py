@@ -11,9 +11,22 @@ from database.connection import Settings
 from fastapi.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
 
-BASE_DIR = os.path.dirname(os.path.realpath("__file__"))
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+BASE_DIR = os.path.dirname(os.path.realpath("__file__"))
+
 settings = Settings()
 app.include_router(user_router,prefix="/user")
 app.include_router(event_router,prefix="/event")
@@ -34,7 +47,7 @@ async def index_test(request: Request):
         "BASE_DIR":BASE_DIR,
     })
 
-@app.get('/contact')
+@app.get('/example')
 async def contact_test(request: Request):
     return templates.TemplateResponse("contact.html",{
         "request":request,

@@ -1,9 +1,39 @@
 @charset "utf-8";
 
 body {
-    background-color: skyblue;
+    background-color: whitesmoke;
 }
 
 h1 {
     color: blue;
+}
+
+.error-message {
+    color:red;
+  }
+  .error input {
+      box-shadow: 0 0 3px #CC0000;
+   }
+  .valid input {
+      box-shadow: 0 0 3px #36cc00;
+   }
+
+.htmx-indicator{
+    opacity:0;
+    transition: opacity 500ms ease-in;
+}
+.htmx-request .htmx-indicator{
+    opacity:1
+}
+.htmx-request.htmx-indicator{
+    opacity:1
+}
+.my-indicator{
+    display:none;
+}
+.htmx-request .my-indicator{
+    display:inline;
+}
+.htmx-request.my-indicator{
+    display:inline;
 }
