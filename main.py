@@ -1,6 +1,6 @@
 import os
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from routes.users import user_router
 from routes.events import event_router
 
@@ -54,6 +54,24 @@ async def contact_test(request: Request):
         "BASE_DIR":BASE_DIR,
     })
 
+@app.get('/set-cookie')
+async def set_cookie(response: Response):
+    response.set_cookie(key="test",value="test111",httponly=True)
+    return {
+        "message": "쿠키가 생성됐습니다."
+    }
+
+@app.get("/get-cookies")
+async def get_cookies(request: Request):
+    # 클라이언트로부터 전송된 모든 쿠키 읽기
+    cookies = request.cookies
+    # 특정 쿠키의 값을 가져옵니다 (예: 'test' 쿠키)
+    test_cookie = cookies.get("test", "쿠키가 없습니다")
+    return templates.TemplateResponse("cookies.html",{
+        "request":request,
+        "cookies":cookies,
+        "test_cookie": test_cookie
+    })
 
 if __name__ == "__main__":
     uvicorn.run("main:app",host="127.0.0.1", port=8000, reload=True)
