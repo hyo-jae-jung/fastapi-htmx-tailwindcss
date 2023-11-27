@@ -54,7 +54,7 @@ async def contact_test(request: Request):
         "BASE_DIR":BASE_DIR,
     })
 
-@app.get('/set-cookie')
+@app.get('/set-cookies')
 async def set_cookie(response: Response):
     response.set_cookie(key="test",value="test111",httponly=True)
     return {
