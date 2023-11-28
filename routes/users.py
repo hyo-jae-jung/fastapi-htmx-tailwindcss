@@ -48,16 +48,20 @@ async def sign_user_in(response: Response, request: Request, user: OAuth2Passwor
     if hash_password.verify_hash(user.password, user_exist.password):
         access_token = create_access_token(user_exist.email)
         response.set_cookie(key="token",value=access_token,httponly=True)
-        return {
-            "access_token": access_token,
-            "token_type": "Bearer"
-        }
-    # templates.TemplateResponse("users.html",{
-    #     "request":request,
-    #     "username":user.username,
-    #     # "BASE_DIR":BASE_DIR,
-    # })
+        # return {
+        #     "access_token": access_token,
+        #     "token_type": "Bearer"
+        # }
+        # return templates.TemplateResponse("users.html",{
+        #         "request":request,
+        #         "username":user.username,
+        #         # "BASE_DIR":BASE_DIR,
+        #     })
     
+        response.status_code = status.HTTP_302_FOUND
+        response.headers["Location"] = "/users"  # 리디렉션할 URL
+        return response
+                
     raise HTTPException(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="Invalid details passed"
